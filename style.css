@@ -11,33 +11,68 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    perspective: 2000px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Butterfly Animations */
+.butterflies-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.butterfly {
+    position: absolute;
+    font-size: 1.8rem;
+    animation: flyButterfly 8s ease-in-out infinite alternate;
+    filter: drop-shadow(0 2px 4px rgba(74, 43, 29, 0.6));
+}
+
+@keyframes flyButterfly {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(60px, -80px) rotate(15deg); }
+    100% { transform: translate(-40px, 50px) rotate(-10deg); }
+}
+
+.chef-badge {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: rgba(212, 163, 115, 0.2);
+    border: 1px solid #d4a373;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #faedcd;
+    letter-spacing: 1px;
 }
 
 /* Container */
 .book-container {
-    width: 90vw;
-    max-width: 1100px;
-    height: 85vh;
+    width: 92vw;
+    max-width: 900px;
+    min-height: 90vh;
+    margin: 20px auto;
     position: relative;
 }
 
 /* Page Base Styles */
 .page {
-    position: absolute;
     width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    min-height: 85vh;
     border-radius: 16px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    position: relative;
+    padding: 30px;
 }
 
 /* --- PAGE 1: Home Page Styling --- */
 .page-1 {
-    z-index: 2;
     background: radial-gradient(circle at center, #231711 0%, #120d0a 70%);
     border: 2px solid rgba(212, 163, 115, 0.3);
     display: flex;
@@ -58,20 +93,27 @@ body {
     font-size: 3.8rem;
     font-weight: 700;
     letter-spacing: 1px;
-    background: linear-gradient(45deg, #d4a373, #faedcd, #ccd5ae);
+    background: linear-gradient(45deg, #d4a373, #faedcd, #d4a373, #ccd5ae);
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: fadeInDown 1.5s ease-in-out;
+    animation: gradientShift 6s ease infinite, fadeInDown 1.5s ease-in-out;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .cup-wrapper {
-    width: 260px;
-    height: 260px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
     border: 4px solid #d4a373;
-    animation: floatCup 4s ease-in-out infinite, scaleUp 1.2s ease-out;
+    animation: floatCup 4s ease-in-out infinite;
 }
 
 .animated-cup {
@@ -84,7 +126,6 @@ body {
     font-size: 1.1rem;
     color: #d4a373;
     font-style: italic;
-    animation: fadeInUp 1.5s ease-in-out;
 }
 
 .btn-open-menu {
@@ -106,26 +147,53 @@ body {
     background-color: #faedcd;
 }
 
-/* --- PAGE 2: Menu Page Styling --- */
-.page-2 {
+/* --- PAGE MENU LAYOUT (Coffee & Dishes) --- */
+.page-menu-layout {
     background: linear-gradient(135deg, #fdfbf7 0%, #f4ede2 100%);
     color: #2b1d14;
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 30px;
-    align-content: center;
-    padding: 50px;
     border: 2px solid #d4a373;
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
 }
 
-.menu-left-content h2 {
+/* Top Navigation Buttons */
+.nav-buttons-group-top {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    justify-content: flex-start;
+}
+
+.btn-back, .btn-next {
+    background: transparent;
+    border: 2px solid #5a3e2b;
+    color: #5a3e2b;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-back:hover, .btn-next:hover {
+    background-color: #5a3e2b;
+    color: #fdfbf7;
+}
+
+.menu-content-wrapper {
+    width: 100%;
+}
+
+.menu-content-wrapper h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     color: #3b2314;
     margin-bottom: 5px;
 }
 
-.menu-left-content .subtitle {
+.menu-content-wrapper .subtitle {
     font-style: italic;
     color: #8c6d53;
     font-size: 0.95rem;
@@ -138,7 +206,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
     color: #5a3e2b;
-    margin-bottom: 12px;
+    margin: 20px 0 10px 0;
     font-weight: 700;
     letter-spacing: 1px;
     border-left: 3px solid #d4a373;
@@ -148,8 +216,7 @@ body {
 .menu-items-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px 25px;
-    margin-bottom: 20px;
+    gap: 12px 30px;
 }
 
 .menu-item-row {
@@ -157,64 +224,42 @@ body {
     justify-content: space-between;
     align-items: baseline;
     border-bottom: 1px dotted rgba(90, 62, 43, 0.2);
-    padding-bottom: 4px;
+    padding-bottom: 6px;
 }
 
 .menu-item-row span {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
 }
 
 .menu-item-row .price {
     color: #8c6d53;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
-/* Right Visuals with Animated Drink PNGs */
-.menu-right-visuals {
+/* Middle Video Container Integration */
+.middle-video-wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background: rgba(212, 163, 115, 0.1);
-    border-radius: 20px;
-    padding: 20px;
-    border: 1px solid rgba(212, 163, 115, 0.3);
+    margin: 30px 0;
+    width: 100%;
 }
 
-.floating-png {
-    width: 110px;
-    height: 110px;
-    object-fit: contain;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-    animation: floatSide 3.5s ease-in-out infinite;
+.video-916-container {
+    width: 220px;
+    height: 390px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(212, 163, 115, 0.5);
+    background: #000;
 }
 
-.floating-png:nth-child(2) {
-    animation-delay: 1.2s;
-    width: 130px;
-    height: 130px;
-}
-
-.btn-back {
-    position: absolute;
-    bottom: 25px;
-    left: 50px;
-    background: transparent;
-    border: 2px solid #5a3e2b;
-    color: #5a3e2b;
-    padding: 8px 22px;
-    border-radius: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-back:hover {
-    background-color: #5a3e2b;
-    color: #fdfbf7;
+.video-916-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Keyframes */
@@ -223,131 +268,48 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scaleUp {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
 @keyframes floatCup {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
 
-@keyframes floatSide {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-12px) rotate(3deg); }
-}
-/* Button Navigation Toolbar */
-.nav-buttons-group {
-    position: absolute;
-    bottom: 25px;
-    left: 40px;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-/* Base button adjustment for shared pages */
-.page-2 .btn-back, 
-.page-2 .btn-next {
-    position: static !important;
-    background: transparent;
-    border: 2px solid #5a3e2b;
-    color: #5a3e2b;
-    padding: 8px 22px;
-    border-radius: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.page-2 .btn-back:hover, 
-.page-2 .btn-next:hover {
-    background-color: #5a3e2b;
-    color: #fdfbf7;
-}
 /* ================= MOBILE RESPONSIVE FIXES ================= */
-@media screen and (max-width: 900px) {
-    /* Allow scrolling on mobile */
+@media screen and (max-width: 768px) {
     body {
-        height: auto;
-        min-height: 100vh;
-        overflow-y: auto;
-        padding: 20px 10px;
+        padding: 10px;
     }
 
-    /* Expand the book container to fit mobile screens */
     .book-container {
         width: 100%;
-        max-width: 100%;
-        height: auto;
-        min-height: 90vh;
+        margin: 5px auto;
     }
 
-    /* Convert grid layouts (Page 2 & Dishes) into a single vertical column */
-    .page-2 {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-        padding: 25px 15px !important;
-        position: relative !important;
-        height: auto !important;
+    .page {
+        padding: 20px 15px;
+        min-height: auto;
     }
 
-    /* Make left menu content full width and remove scroll constraints */
-    .menu-left-content {
-        max-height: none !important;
-        overflow-y: visible !important;
-        padding-right: 0 !important;
-        width: 100%;
-    }
-
-    /* Scale down titles and text for mobile */
     .animated-title {
-        font-size: 2.5rem !important;
+        font-size: 2.4rem !important;
     }
 
-    .menu-left-content h2 {
-        font-size: 2rem !important;
-    }
-
-    /* Shrink the coffee video/image container on Home page */
-    .cup-wrapper {
-        width: 200px !important;
-        height: 200px !important;
-    }
-
-    /* Shrink 9:16 vertical video containers so they fit mobile screens nicely */
-    .video-916-container {
-        width: 180px !important;
-        height: 320px !important;
-        margin: 0 auto;
-    }
-
-    .menu-right-visuals {
-        width: 100%;
-        padding: 10px !important;
-    }
-
-    /* Fix navigation buttons so they stack or space correctly without overlapping */
-    .nav-buttons-group {
-        position: relative !important;
-        bottom: auto !important;
-        left: auto !important;
-        display: flex;
-        justify-content: center;
+    .menu-items-grid {
+        grid-template-columns: 1fr;
         gap: 10px;
-        margin-top: 20px;
-        width: 100%;
+    }
+
+    .video-916-container {
+        width: 180px;
+        height: 320px;
+    }
+
+    .nav-buttons-group-top {
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     .btn-back, .btn-next {
-        font-size: 0.85rem !important;
-        padding: 8px 15px !important;
+        padding: 6px 12px;
+        font-size: 0.8rem;
     }
 }
