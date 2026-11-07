@@ -7,33 +7,23 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .video-916-container {
-            width: 240px;
-            height: 426px;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(212, 163, 115, 0.4);
-            background: #000;
-        }
-        .video-916-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
 </head>
 <body>
 
     <div class="book-container">
         <!-- Dishes & Desserts Showcase Page -->
-        <div class="page page-2" style="transform: none; position: relative; width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 280px; gap: 30px; align-content: center; padding: 40px;">
+        <div class="page page-menu-layout">
             
-            <!-- Left Side: Food & Desserts Menu -->
-            <div class="menu-left-content" style="max-height: 80vh; overflow-y: auto; padding-right: 15px;">
+            <!-- Navigation Buttons Positioned Above Content -->
+            <div class="nav-buttons-group-top">
+                <button class="btn-back" onclick="window.location.href='coffee.html'">⬅ Coffee Menu</button>
+                <button class="btn-next" onclick="window.location.href='index.html'">Home 🏠</button>
+            </div>
+            
+            <!-- Food & Desserts Menu with Middle Video Integration -->
+            <div class="menu-content-wrapper">
                 <h2>Food & Desserts</h2>
-                <div class="subtitle">Good Food, Good Mood, Good Life</div>
+                <div class="subtitle">Good Food, Good Mood, Good Life 🍽️</div>
                 
                 <div class="menu-category-title">🍔 FOOD MENU</div>
                 <div class="menu-items-grid">
@@ -46,7 +36,17 @@
                     <div class="menu-item-row"><span>Garlic Bread</span> <span class="price">₹120</span></div>
                 </div>
 
-                <div class="menu-category-title" style="margin-top: 15px;">🍰 DESSERTS</div>
+                <!-- Embedded 9:16 Vertical Video Directly in Between Food and Desserts -->
+                <div class="middle-video-wrapper">
+                    <div class="video-916-container">
+                        <video autoplay muted loop playsinline>
+                            <source src="https://pqxfjszlxpnyjrygiydb.supabase.co/storage/v1/object/public/cafe_assets/vedio_1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+
+                <div class="menu-category-title" style="margin-top: 25px;">🍰 DESSERTS</div>
                 <div class="menu-items-grid">
                     <div class="menu-item-row"><span>Chocolate Cake</span> <span class="price">₹180</span></div>
                     <div class="menu-item-row"><span>Cheesecake</span> <span class="price">₹180</span></div>
@@ -57,21 +57,6 @@
                 </div>
             </div>
 
-            <!-- Right Side: 9:16 Vertical Video Player -->
-            <div class="menu-right-visuals" style="background: rgba(212, 163, 115, 0.08); border-radius: 20px; padding: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div class="video-916-container">
-                    <video autoplay muted loop playsinline>
-                        <source src="https://pqxfjszlxpnyjrygiydb.supabase.co/storage/v1/object/public/cafe_assets/vedio_1.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div>
-
-            <!-- Clean Grouped Navigation Buttons -->
-            <div class="nav-buttons-group">
-                <button class="btn-back" onclick="window.location.href='coffee.html'">⬅ Coffee Menu</button>
-                <button class="btn-next" onclick="window.location.href='index.html'">Home 🏠</button>
-            </div>
         </div>
     </div>
 
