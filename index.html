@@ -10,18 +10,24 @@
 </head>
 <body>
 
+    <!-- Floating Chocolate Butterflies & Chef Hats Background Elements -->
+    <div class="butterflies-container">
+        <div class="butterfly" style="top: 15%; left: 10%; animation-delay: 0s;">🦋</div>
+        <div class="butterfly" style="top: 70%; left: 85%; animation-delay: 2s;">🦋</div>
+        <div class="butterfly" style="top: 30%; left: 80%; animation-delay: 4s;">🦋</div>
+        <div class="chef-badge" style="top: 12% right: 12%;">👨‍🍳 Artisanal Brews</div>
+    </div>
+
     <div class="book-container">
-        
         <!-- PAGE 1: Landing Page -->
-        <div class="page page-1" style="transform: none; position: relative; width: 100%; height: 100%;">
+        <div class="page page-1">
             <div class="cafe-container">
-                <!-- Glowing Bold Title -->
+                <!-- Glowing Bold Animated Title -->
                 <h1 class="animated-title">Dream Life Cafe</h1>
                 
                 <!-- Circular Wrapper with Supabase Video -->
                 <div class="cup-wrapper">
                     <video autoplay muted loop playsinline class="animated-cup">
-                        <!-- Replace with your actual Supabase Public URL -->
                         <source src="https://pqxfjszlxpnyjrygiydb.supabase.co/storage/v1/object/public/cafe_assets/coffee_cup.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -30,11 +36,10 @@
                 <!-- Tagline -->
                 <p class="tagline">Sip the magic of your dream life.</p>
 
-                <!-- Open Menu Button linked directly to coffee.html -->
+                <!-- Open Menu Button -->
                 <button class="btn-open-menu" id="openMenuBtn">Open Menu ➔</button>
             </div>
         </div>
-
     </div>
 
     <script src="app.js"></script>
